@@ -13,8 +13,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/add-student" element={<AddStudent />} />
-        <Route path="/students" element={<StudentsList />} />
+        <Route path="/add-customer" element={<AddStudent />} />
+        <Route path="/customers" element={<StudentsList />} />
       </Routes>
       <ToastContainer position="top-right" autoClose={3000} />
     </Router>

@@ -3,9 +3,7 @@ import session from 'express-session';
 import cors from 'cors';
 import multer from "multer";
 
-import studentRoutes from './routes/studentRoutes.js';
-import authMiddleware from './middleware/auth.js';
-import userRoutes from './routes/userRoutes.js';
+import customerRoutes from './routes/customerRoutes.js';
 
 export const app = express();
 app.use(cors());
@@ -29,5 +27,4 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 app.use("/images", express.static("images"));
-app.use("/user", userRoutes);
-app.use("/", upload.single("photo"),studentRoutes);
+app.use("/", upload.single("photo"), customerRoutes);

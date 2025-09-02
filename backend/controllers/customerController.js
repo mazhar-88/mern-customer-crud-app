@@ -1,9 +1,9 @@
 import { MongoClient, ObjectId } from 'mongodb';
 import { dbInstance } from "../config/db.js";
 
-const collectionName = "studentsRoom";
+const collectionName = "customerRoom";
 
-export const postStudentController = async (req, res) => {
+export const postCustomerController = async (req, res) => {
     let db = dbInstance();
     try {
         const { fullName, age, className, email, address } = req.body;
@@ -69,7 +69,7 @@ export const postStudentController = async (req, res) => {
     }
 };
 
-export const getStudentController = async (req, res) => {
+export const getCustomerController = async (req, res) => {
     let db = dbInstance();
     try {
         // pagination
@@ -114,7 +114,7 @@ export const getStudentController = async (req, res) => {
 };
 
 
-export const updateStudentController = async (req, res) => {
+export const updateCustomerController = async (req, res) => {
     let db = dbInstance();
     try {
         const id = req.params.id;
@@ -145,7 +145,7 @@ export const updateStudentController = async (req, res) => {
     }
 };
 
-export const deleteStudentController = async (req, res) => {
+export const deleteCustomerController = async (req, res) => {
     let db = dbInstance();
     try {
         const id = req.params.id;
