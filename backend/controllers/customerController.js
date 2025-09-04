@@ -1,16 +1,16 @@
 import { MongoClient, ObjectId } from 'mongodb';
 import { dbInstance } from "../config/db.js";
 
-const collectionName = "customerRoom";
+const collectionName = "customers-room";
 
 export const postCustomerController = async (req, res) => {
     let db = dbInstance();
     try {
-        const { fullName, age, className, email, address } = req.body;
+        const { fullName, email, phone, address } = req.body;
         const image = req?.file?.filename;
 
         // Required fields list
-        const requiredFields = { fullName, age, className, email, address, image };
+        const requiredFields = { fullName,email, phone, address, image };
         const missingFields = [];
 
         for (let key in requiredFields) {
@@ -36,14 +36,11 @@ export const postCustomerController = async (req, res) => {
 
         const requestObj = {
             fullName,
-            age,
-            className,
             email,
+            phone,
             address,
             image,
         };
-
-
 
         let result = await db.collection(collectionName).insertOne(requestObj);
 
@@ -73,8 +70,8 @@ export const getCustomerController = async (req, res) => {
     let db = dbInstance();
     try {
         // pagination
-        const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 5;
+        const page = parseInt(req?.query?.page) || 1;
+        const limit = parseInt(req?.query?.limit) || 5;
         const skip = (page - 1) * limit;
 
         // 🔹 search filter
@@ -83,7 +80,7 @@ export const getCustomerController = async (req, res) => {
         if (search) {
             filter = {
                 $or: [
-                    { fullName: { $regex: search, $options: "i" } }, // case-insensitive
+                    { fullName: { $regex: search, $options: "i" } },
                     { email: { $regex: search, $options: "i" } }
                 ]
             };
@@ -120,9 +117,8 @@ export const updateCustomerController = async (req, res) => {
         const id = req.params.id;
         const objForUpdate = {
             fullName: req?.body?.fullName || "John",
-            age: req?.body?.age || 12,
-            classname: req?.body?.classname || 8,
             email: req?.body?.email || "john@gmail.com",
+            phone: req?.body?.age || 92333478797,
             address: req?.body?.address || "abc",
             image: req?.file?.filename || "static",
         };
